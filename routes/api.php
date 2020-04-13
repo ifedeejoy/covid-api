@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::post('v1/on-covid-19', 'EstimatorController@covid19ImpactEstimator');
-Route::post('v1/on-covid-19/json', 'EstimatorController@covid19ImpactEstimator');
-Route::post('v1/on-covid-19/xml', 'EstimatorController@covid19ImpactEstimator');
+Route::get('v1/on-covid-19/json', 'EstimatorController@covid19ImpactEstimator');
+Route::get('v1/on-covid-19/xml', 'EstimatorController@covid19ImpactEstimator');
 Route::get('v1/on-covid-19/logs', 'Logs@apiLogs');
