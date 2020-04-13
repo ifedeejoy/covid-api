@@ -10,6 +10,6 @@ class Logs extends Controller
     public function apiLogs()
     {
         $file = Storage::get('public/log.txt');
-        return $file;
+        return response($file, 200)->header('Content-Type', "text/plain");
     }
 }
