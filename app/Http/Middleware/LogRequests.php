@@ -41,7 +41,10 @@ class LogRequests
         $ip = $request->getClientIp();
         $status = $response->status();
         if($duration < 10):
+            $duration = (int) $duration;
             $duration = "0".$duration;
+        else:
+            $duration = (int)$duration;
         endif;
         $content = "$method     /"."$url        $status     $duration". "ms \n";
         if(Storage::disk('local')->exists('/public/log.txt')):
