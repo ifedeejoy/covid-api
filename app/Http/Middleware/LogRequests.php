@@ -43,7 +43,7 @@ class LogRequests
         if($duration < 10):
             $duration = "0".$duration;
         endif;
-        $content = "$method     $url    $status     $duration". "ms \n";
+        $content = "$method     /"."$url    $status     $duration". "ms \n";
         if(Storage::disk('local')->exists('/public/log.txt')):
             Storage::append('public/log.txt', $content);
         else:
