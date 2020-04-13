@@ -16,7 +16,7 @@ class EstimatorController extends Controller
     public function covid19ImpactEstimator(Request $request)
     {
         $name = $request->input('name'); 
-        $avgAge = $request->input('avgAge'); 'avgAge';
+        $avgAge = $request->input('avgAge');
         $avgIncome = $request->input('avgDailyIncomeInUSD');
         $avgPopulation = $request->input('avgDailyIncomePopulation');
         $periodType = $request->input('periodType');
@@ -133,12 +133,15 @@ class EstimatorController extends Controller
     {
         if($periodType == "days"):
             $period = $timeToElapse;
+            return $period;
         elseif($periodType == "weeks"):
             $period = $timeToElapse * 7;
+            return $period;
         elseif ($periodType == "months"):
             $period = $timeToElapse * 30;
+            return $period;
         endif;
-        return $period;
+        
     }
 
     public function currentlyInfected($reportedCases, $multiplier)
