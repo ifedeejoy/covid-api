@@ -13,7 +13,7 @@ class EstimatorController extends Controller
         $this->result = null;
     }
 
-    public function covid19ImpactEstimator(Request $request, $type)
+    public function covid19ImpactEstimator(Request $request)
     {
         $name = $request->input('name'); 
         $avgAge = $request->input('avgAge'); 'avgAge';
