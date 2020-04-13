@@ -13,7 +13,7 @@ class EstimatorController extends Controller
         $this->result = null;
     }
 
-    public function covid19ImpactEstimator(Request $request)
+    public function covid19ImpactEstimator(Request $request, $type)
     {
         $name = $request->input('name'); 
         $avgAge = $request->input('avgAge'); 'avgAge';
@@ -42,10 +42,10 @@ class EstimatorController extends Controller
         $impact = $this->impact($reportedCases, $periodType, $timeToElapse, $totalBeds, $avgIncome, $avgPopulation);
         $severe = $this->severe($reportedCases, $periodType, $timeToElapse, $totalBeds, $avgIncome, $avgPopulation);
         $data = array("data" => $input, "impact" => $impact, "severeImpact" => $severe);
-        if($request->path() == "api/v1/on-covid-19" || $request->path() == "api/v1/on-covid-19/json"):
+        if($request->path() == "api/v1/on-covid-19" || $request->type == "json"):
             $this->result =  response(json_encode($data), 200)->header('Content-Type', "application/json");
             return $this->result;
-        elseif($request->path() == "api/v1/on-covid-19/xml"):
+        elseif($request->type == "xml"):
             $this->result = $this->xmlResponse($data)->header('Content-Type', "application/xml");
             return $this->result;
         endif;
