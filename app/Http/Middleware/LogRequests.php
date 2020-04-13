@@ -40,7 +40,10 @@ class LogRequests
         $method = $request->getMethod();
         $ip = $request->getClientIp();
         $status = $response->status();
-        $content = "$method     $url    $status     $duration". "ms \n";
+        if($duration < 10):
+            $duration = "0".$duration;
+        endif;
+        $content = "$method $url $status $duration". "ms \n";
         if(Storage::disk('local')->exists('/public/log.txt')):
             Storage::append('public/log.txt', $content);
         else:
