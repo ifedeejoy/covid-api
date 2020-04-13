@@ -15,29 +15,13 @@ class EstimatorController extends Controller
 
     public function covid19ImpactEstimator(Request $request)
     {
-        $name = $request->input('name'); 
-        $avgAge = $request->input('avgAge');
-        $avgIncome = $request->input('avgDailyIncomeInUSD');
-        $avgPopulation = $request->input('avgDailyIncomePopulation');
-        $periodType = $request->input('periodType');
-        $timeToElapse = $request->input('timeToElapse');
-        $reportedCases = $request->input('reportedCases');
-        $population = $request->input('population');
-        $totalBeds = $request->input('totalHospitalBeds');
-
-        $input = array(
-            "region" => array(
-                "name"=> $name,
-                "avgAge"=> $avgAge,
-                "avgDailyIncomeInUSD"=> $avgIncome,
-                "avgDailyIncomePopulation"=> $avgPopulation
-            ),
-            "periodType"=> $periodType,
-            "timeToElapse"=> $timeToElapse,
-            "reportedCases"=> $reportedCases,
-            "population"=> $population,
-            "totalHospitalBeds"=> $totalBeds
-        );
+        $input = $request->json()->all();
+        $reportedCases = $input['reportedCases'];
+        $periodType = $input['periodType'];
+        $timeToElapse = $input['timeToElapse'];
+        $totalBeds = $input['totalHospitalBeds'];
+        $avgIncome = $input['region']['avgDailyIncomeInUSD'];
+        $avgPopulation = $input['region']['avgDailyIncomePopulation'];
 
         $impact = $this->impact($reportedCases, $periodType, $timeToElapse, $totalBeds, $avgIncome, $avgPopulation);
         $severe = $this->severe($reportedCases, $periodType, $timeToElapse, $totalBeds, $avgIncome, $avgPopulation);
